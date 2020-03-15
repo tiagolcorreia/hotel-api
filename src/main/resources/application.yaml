@@ -1,0 +1,6 @@
+server:
+  port: 8080
+
+external:
+  cvcbackendhotel:
+      uri: https://cvcbackendhotel.herokuapp.com/hotels
