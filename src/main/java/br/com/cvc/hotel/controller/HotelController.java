@@ -1,15 +1,16 @@
 package br.com.cvc.hotel.controller;
 
-import java.util.Date;
 import java.util.List;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.cvc.hotel.controller.converter.HotelConverter;
+import br.com.cvc.hotel.controller.model.HotelSearchRequest;
 import br.com.cvc.hotel.controller.model.HotelsDTO;
+import br.com.cvc.hotel.model.Hotel;
+import br.com.cvc.hotel.service.HotelService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,13 +20,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class HotelController {
 
-	@GetMapping(path = "")
-	public List<HotelsDTO> search(@RequestParam(defaultValue = "7110") Long cityCFode,
-			@DateTimeFormat(pattern = "dd/MM/yyyy") Date checkin, @DateTimeFormat(pattern = "dd/MM/yyyy") Date checkout,
-			@RequestParam(defaultValue = "2") Integer amountAdults,
-			@RequestParam(defaultValue = "0") Integer amountChildren) {
+	private HotelService hotelService;
+
+	private HotelConverter hotelConverter;
+
+	@GetMapping(path = "") public List<HotelsDTO> search(HotelSearchRequest request) {
 		log.debug("init search");
-		return null;
+
+		List<Hotel> hotels = hotelService.search(request.getCityCode(), request.getCheckin(), request.getCheckout(),
+				request.getAmountAdults(), request.getAmountChildren());
+		
+		return hotelConverter.convert(hotels);
 	}
 
 }

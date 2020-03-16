@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+spring:
+  application:
+    name: hotel-api
+    
 external:
   cvcbackendhotel:
-      uri: https://cvcbackendhotel.herokuapp.com/hotels
+      uri: https://cvcbackendhotel.herokuapp.com
