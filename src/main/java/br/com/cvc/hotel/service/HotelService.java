@@ -15,6 +15,7 @@ import br.com.cvc.hotel.external.model.HotelDTO;
 import br.com.cvc.hotel.model.Hotel;
 import br.com.cvc.hotel.model.Price;
 import br.com.cvc.hotel.model.Room;
+import br.com.cvc.hotel.util.DateUtil;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -23,13 +24,14 @@ public class HotelService {
 	
 	private CvcBackendHotelExternal backendHotel;
 	private HotelExternalConverter hotelConverter;
+	private DateUtil dateUtil;
 	private final BigDecimal COMMISION = BigDecimal.valueOf(0.7);
 	
 	@Cacheable(value = "hotels")
 	public List<Hotel> search(Long cityId, Date checkin, Date checkout, Integer amountAdults, Integer amountChildren) {
 		List<HotelDTO> hotelsDTO = backendHotel.getAvailableHotelsPerCity(cityId);
 		List<Hotel> hotels = hotelConverter.convert(hotelsDTO);
-		long days = daysBetweenDates(checkin, checkout);
+		long days = dateUtil.daysBetweenDates(checkin, checkout);
 		final BigDecimal adultsFactor = BigDecimal.valueOf(days * amountAdults);
 		final BigDecimal childrenFactor = BigDecimal.valueOf(days * amountChildren);
 		for (final Hotel hotel : hotels) {
@@ -43,11 +45,6 @@ public class HotelService {
 			}
 		}
 		return hotels;
-	}
-	
-	private long daysBetweenDates(Date checkin, Date checkout) {
-	    long diff = checkout.getTime() - checkin.getTime();
-	    return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
 	}
 	
 }
