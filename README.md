@@ -15,4 +15,4 @@ https://github.com/tiagolcorreia/hotel-api
 
 ## Arquitetura
 
-![Files](/doc/files.jpg)
+![Files](/doc/files.JPG)
