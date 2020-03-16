@@ -1,18 +1,10 @@
 package br.com.cvc.hotel.controller;
 
-import org.springframework.validation.BindException;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import com.google.common.net.HttpHeaders;
 
 import br.com.cvc.hotel.controller.model.ExceptionResponse;
 import lombok.extern.slf4j.Slf4j;

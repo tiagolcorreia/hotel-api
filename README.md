@@ -13,3 +13,6 @@ https://github.com/tiagolcorreia/hotel-api
 | Health Check      | http://localhost:8080/actuator/health          |
 | Swagger-UI        | http://localhost:8080/swagger-ui.html          |
 
+## Arquitetura
+
+![Files](/doc/files.jpg)
